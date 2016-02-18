@@ -5,5 +5,5 @@
 ## Quick start
 
 ```sh
-docker run --rm svagi/curl -vs https://h2.svager.cz/
+docker run --rm -t svagi/curl -v https://h2.svager.cz/
 ```
