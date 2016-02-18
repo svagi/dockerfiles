@@ -7,3 +7,7 @@
 ```sh
 docker run --rm -t svagi/curl -v https://h2.svager.cz/
 ```
+
+## Demo
+
+[![asciicast](https://asciinema.org/a/36720.png)](https://asciinema.org/a/36720)
