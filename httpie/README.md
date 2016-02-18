@@ -1,4 +1,4 @@
-# HTTPIE tool with experimental HTTP/2 support
+# HTTPie tool with experimental HTTP/2 support
 
 [![](https://badge.imagelayers.io/svagi/httpie:latest.svg)](https://imagelayers.io/?images=svagi/httpie:latest)
 
