@@ -6,8 +6,8 @@
 - with **HTTP/2** support
 - with **latest** version of the **OpenSSL** library (1.0.2g 1 Mar 2016)
 
-## Versions
-- latest, 1.9.12 ([Dockerfile](https://github.com/svagi/dockerfiles/blob/master/nginx/Dockerfile))
+## Version
+- latest mainline (1.9.13) ([Dockerfile](https://github.com/svagi/dockerfiles/blob/master/nginx/Dockerfile))
 
 ## Motivation
 - Minimal image size.
