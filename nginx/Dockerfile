@@ -1,7 +1,7 @@
 FROM alpine:3.3
 MAINTAINER Jan Svager <jan@svager.cz>
 
-ENV NGINX_VERSION='1.9.12' \
+ENV NGINX_VERSION='1.9.13' \
     NGINX_USER='nginx' \
     NGINX_GROUP='nginx' \
     OPENSSL_VERSION='1.0.2g' \
