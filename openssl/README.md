@@ -1,5 +1,7 @@
 # OpenSSL
 
+[![](https://badge.imagelayers.io/svagi/openssl:latest.svg)](https://imagelayers.io/?images=svagi/openssl:latest)
+
 ## Usage
 
 ### Check OpenSSL version
