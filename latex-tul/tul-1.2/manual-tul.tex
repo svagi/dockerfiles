@@ -1,0 +1,417 @@
+\documentclass[a4paper,12pt,twoside]{article}
+% tento dokument používá balíky specifické pro XeLaTeX a lze jej přeložit
+% jen XeLaTeXem, nemáte-li instalována použitá (komerční) písma Myriad Pro
+% a Vida Mono 32 Pro, vymažte volbu fonts u balíku tul a příkaz \setmonofont
+
+\newcommand{\verze}{1.2}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{czech}
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{tabularx}
+
+% živé odkazy v PDF
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=tul, urlcolor=tul, citecolor=tul}
+\hypersetup{pdftitle={Návod k použití balíku tul pro LaTeX verze \verze}}
+
+\usepackage[fonts,noheader]{tul}
+\TULmail{Pavel.Satrapa@tul.cz}
+\setmonofont[Scale=MatchLowercase]{Vida Mono 32 Pro}
+
+% definice příkazů a prostředí specifických pro tento dokument
+\newcommand{\cmdfont}[1]{\texttt{\color{\tulcolor}#1}}
+\newcommand{\cmd}[1]{\cmdfont{\textbackslash #1}}
+\newcommand{\demobox}{\raisebox{-.5ex}{\rule{1em}{1em}}}
+\newenvironment{itemize*}%
+  {\begin{itemize}%
+    \setlength{\parskip}{0.25\baselineskip}%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\partopsep}{0pt}%
+    \setlength{\topsep}{0pt}}%
+  {\end{itemize}}
+
+% redefinice log LaTeXu a spol. - Myriad Pro vyžaduje větší mezery
+\makeatletter
+\def\TeX{T\kern-.1667em\lower.5ex\hbox{E}\kern-.1emX\@}
+\DeclareRobustCommand{\LaTeX}{L\kern-.29em%
+        {\sbox\z@ T%
+         \vbox to\ht\z@{\hbox{\check@mathfonts
+                              \fontsize\sf@size\z@
+                              \math@fontsfalse\selectfont
+                              A}%
+                        \vss}%
+        }%
+        \kern-.12em%
+        \TeX}
+\DeclareRobustCommand{\LaTeXe}{\mbox{\LaTeX{\kern.15em}2$_{\mbox{\itshape ε}}$}}
+\DeclareRobustCommand\XeLaTeX{%
+  \leavevmode
+  \smash{%
+    X\lower.5ex
+    \hbox{\kern-.1em
+      \setbox0=\hbox{E}\dimen0=\ht0\advance\dimen0by\dp0\relax
+      \reflectbox{E}%
+    }\kern-0.075em\LaTeX}}
+\makeatother
+
+\parindent=0pt
+\parskip=0.5\baselineskip
+\sloppy
+
+\begin{document}
+
+\TULfancytitlepage{Návod k~použití balíku\\ tul pro \LaTeX\ (verze \verze)}
+{Pavel Satrapa}
+{Liberec 2015}
+
+
+Cílem balíku \cmdfont{tul} je usnadnit vytváření dokumentů odpovídajících
+vizuálnímu stylu Technické univerzity v~Liberci a jejích součástí
+v~typografickém programu \LaTeX. Balík definuje
+
+\begin{itemize*}
+\item univerzitní barvy
+\item grafické prvky (loga, znak, spojovací prvek)
+\item záhlaví a zápatí stránek
+\item vzhled nadpisů pro strukturování textu
+\item písma (pokud jsou v~systému k~dispozici)
+\end{itemize*}
+
+
+\section{Předpoklady}
+
+Balík \cmdfont{tul} ke své činnosti potřebuje několik dalších balíků. Jedná
+se o~běžně dostupné balíky, které bývají obvyklou součástí instalací (jako je
+například \TeX\ Live):
+
+\begin{itemize*}
+\item fancyhdr
+\item graphicx
+\item ifthen
+\item titlesec
+\item xcolor
+\end{itemize*}
+
+Jelikož loga jsou reprezentována obrázky ve formátu PDF, je třeba, aby použitá
+implementace \TeX u podporovala tento grafický formát. Ideální je implementace,
+která přímo vytváří PDF výstup, jako je například pdf\LaTeX\ nebo \XeLaTeX.
+
+
+\section{Použití}
+
+Balík je tvořen několika soubory: základ tvoří soubor \cmdfont{tul.sty}
+obsahující vlastní příkazy. Doprovází jej jednotlivé grafické prvky
+s~příslušnými logy~-- soubory \cmdfont{logo-*.pdf} a \cmdfont{znak-*.pdf}.
+Balík doplňuje soubor \cmdfont{tulthesis.cls} definující třídu pro sazbu
+absolventských prací TUL. Umístěte tyto soubory do vhodné složky, kde je vaše
+instalace \LaTeX u najde. Doporučujeme zřídit pro balík samostatný adresář ve
+složce, kde se nacházejí ostatní balíky vaší instalace. Nezapomeňte
+aktualizovat databázi souborů, aby \LaTeX\ soubory skutečně našel (příkazem
+\cmdfont{texhash}, \cmdfont{mktexlsr} nebo jeho ekvivalentem).
+
+Vlastní použití v~dokumentech je zcela standardní~-- v~preambuli uveďte
+
+\begin{quote}
+\cmd{usepackage\{tul\}}
+\end{quote}
+
+\subsection*{Volby balíku}
+
+Základní sada voleb slouží k~přepínání mezi vizuálními styly jednotlivých
+fakult a ústavů TUL. Pokud nepoužijete žádnou z~nich, bude dokument sázen ve
+vizuálním stylu celé univerzity. Jsou k~dispozici tyto \textbf{volby součástí
+TUL}: \cmdfont{FS}, \cmdfont{FT}, \cmdfont{FP}, \cmdfont{EF}, \cmdfont{FA},
+\cmdfont{FM}, \cmdfont{UZS}, \cmdfont{CXI}. Použití některé z~nich změní
+výchozí barvu, logo a styl zápatí stránek. Používejte vždy nanejvýš jednu
+z~těchto voleb.
+
+Kromě přepínání součástí TUL jsou k~dispozici následující volby:
+
+\medskip
+
+\begin{tabularx}{\textwidth}{@{}lX}
+\cmdfont{EN} & přepne na anglickou verzi~-- týká se generických příkazů
+(např. \cmd{logo}) a nápisů v~zápatí\\
+\cmdfont{bw} & sází se černobíle~-- změní loga na černobílá, nadpisy největších
+částí textu budou černé a univerzitní či fakultní barva je nahrazena šedou \\
+\cmdfont{bwtitles} & nadpisy největších částí textu budou černé, jinde barva zůstane \\
+\cmdfont{noheader} & neumisťovat logo do záhlaví stránek \\
+\cmdfont{fonts} & text dokumentu má být sázen písmem Myriad Pro~-- nepropadejte
+bezbřehému optimismu, fungovat to bude jen za velmi netriviálních podmínek, viz
+část~\ref{pisma} na straně~\pageref{pisma}
+\end{tabularx}
+
+\medskip
+
+Například dokument ve stylu Fakulty mechatroniky bude v~preambuli obsahovat
+
+\begin{quote}
+\cmd{usepackage[FM]\{tul\}}
+\end{quote}
+
+Jestliže je navíc cílem černobílý dokument, změní se použití balíku na
+
+\begin{quote}
+\cmd{usepackage[FM,bw]\{tul\}}
+\end{quote}
+
+
+\section{Barvy}
+
+Balík definuje sadu barev pro TUL a její jednotlivé fakulty, které odpovídají
+vizuálnímu stylu TUL. Lze je používat v~příkazech \cmd{color} a podobných,
+stejně jako standardní předdefinované barvy. Jsou k~dispozici následující
+\textbf{názvy barev}:
+
+\begin{quote}
+{\color{tul}\demobox}\quad\cmdfont{tul}\\
+{\color{tulgray}\demobox}\quad\cmdfont{tulgray}\\
+{\color{tulFS}\demobox}\quad\cmdfont{tulFS}\\
+{\color{tulFT}\demobox}\quad\cmdfont{tulFT}\\
+{\color{tulFP}\demobox}\quad\cmdfont{tulFP}\\
+{\color{tulEF}\demobox}\quad\cmdfont{tulEF}\\
+{\color{tulFA}\demobox}\quad\cmdfont{tulFA}\\
+{\color{tulFM}\demobox}\quad\cmdfont{tulFM}\\
+{\color{tulUZS}\demobox}\quad\cmdfont{tulUZS}\\
+{\color{tulCXI}\demobox}\quad\cmdfont{tulCXI}
+\end{quote}
+
+Kromě těchto pevně daných názvů barev je k~dispozici i příkaz \cmd{tulcolor},
+který obsahuje název barvy té součásti univerzity, v~jejímž stylu je dokument
+sázen. Hodnota \cmd{tulcolor} závisí na „fakultní“ volbě při použití
+balíku. Například barva nadpisů v~tomto dokumentu byla vytvořena pomocí
+\cmd{color\{\textbackslash tulcolor\}}.
+
+
+\section{Grafické prvky}
+
+Sada příkazů umožňuje vkládat do textu loga a podobné grafické prvky. Pro
+úpravu jejich velikosti použijte příkazy \cmd{scalebox} nebo \cmd{resizebox}.
+Loga neobsahují ochrannou zónu, příslušné volné místo kolem nich musí zajistit
+autor dokumentu.
+
+\newcommand{\cmddemo}[1]{\bigskip\parbox[c]{3.5cm}{\cmd{#1}}\parbox[c]{10cm}{\csname #1\endcsname}\bigskip}
+\cmddemo{logoTUL}
+
+\cmddemo{logoTULalt}
+
+\cmddemo{logoFS}
+
+\cmddemo{logoFT}
+
+\cmddemo{logoFP}
+
+\cmddemo{logoEF}
+
+\cmddemo{logoFA}
+
+\cmddemo{logoFM}
+
+\cmddemo{logoCXI}
+
+\cmddemo{logoUZS}
+
+\cmddemo{znakTUL}
+
+\cmddemo{znakTULbw}
+
+\cmddemo{spojovaci}
+
+Znak TUL je jako jediný grafický prvek přístupný v~černobílé variantě, i pokud se
+sází barevně. Slouží k~tomu příkaz \cmd{znakTULbw}. Loga univerzity,
+jednotlivých fakult a ústavů jsou k~dispozici pouze v~jedné variantě~-- bez
+volby \cmdfont{bw} se jedná o~verzi barevnou, pokud ale použijete balík
+s~volbou \cmdfont{bw}, jsou všechna loga (včetně \cmd{znakTUL}) černobílá.
+
+Podoba spojovacího prvku (příkaz \cmd{spojovaci}) odpovídá aktuální fakultě.
+Pokud byl balík \cmdfont{tul} použit bez fakultní volby, jedná se o~spojovací
+prvek univerzity (viz výše). Sází-li se fakultním stylem, odpovídá příslušné
+fakultě či ústavu.
+
+Veškerá loga jsou k dispozici i v anglické verzi, jednotlivé příkazy mají
+předponu \cmdfont{EN}.
+
+\cmddemo{ENlogoTUL}
+
+\cmddemo{ENlogoTULalt}
+
+\cmddemo{ENlogoFS}
+
+\cmddemo{ENlogoFT}
+
+\cmddemo{ENlogoFP}
+
+\cmddemo{ENlogoEF}
+
+\cmddemo{ENlogoFA}
+
+\cmddemo{ENlogoFM}
+
+\cmddemo{ENlogoCXI}
+
+\cmddemo{ENlogoUZS}
+
+Pro obecné konstrukce je k~dispozici příkaz \cmd{logo}, jenž vysází aktuální
+logo~-- tedy logo univerzity nebo její části v~jazykové verzi podle voleb
+balíku \cmdfont{tul}. Pokud jste například balík vložili s~volbami \cmdfont{FS}
+a \cmdfont{EN}, příkaz \cmd{logo} vysází anglickou verzi loga Fakulty strojní.
+Kromě něj existují ještě příkazy \cmd{CZlogo} a \cmd{ENlogo}, z~nichž první
+sází vždy českou a druhý anglickou verzi loga aktuální součásti univerzity
+určené fakultní volbou balíku.
+
+Příbuzný je příkaz \cmd{TULsoucast}, který vloží název aktuální součásti
+univerzity v~aktuální jazykové verzi. Při volbách \cmdfont{FS} a \cmdfont{EN}
+tedy vysází „Faculty of Mechanical Engineering“. Pomocí \cmd{CZTULsoucast} a
+\cmd{ENTULsoucast} lze vysázet název aktuální části v~požadovaném jazyce.
+Nejedná se o~grafické prvky, ale o~běžná textová makra. Do této kapitoly jsem
+je zařadil vzhledem k~příbuznosti s~předchozími příkazy.
+
+
+\section{Záhlaví a zápatí stránky}
+
+Použití stylu automaticky nastaví styl stránky, který v~levém horním rohu nese
+logo, ve spodní části je umístěn grafický prvek s~názvem a adresou, jehož
+součástí je i číslo stránky na vnějším okraji.
+
+Tento formát je vhodný pro krátké dokumenty (např. dopisy). V~případě delších
+textů může přemíra prvků „dekorujících“ stránku škodit. Proto je k~dispozici
+několik příkazů, jimiž lze doprovodné prvky stránek měnit.
+
+\textbf{Záhlaví} s~logem stránkám přidal příkaz \cmd{TULheader}, který se
+provádí automaticky při použití balíku. Jeho opakem je \cmd{noTULheader}, který
+logo v~záhlaví vypne. Příkaz platí vždy od stránky, na které byl použit. Příkaz
+pouze nahradí logo prázdným místem, rozměry stránky a horního okraje zůstanou
+nezměněny. Pokud chcete logo umístit jen na titulní stránku, je vhodnější
+použít volbu balíku \cmdfont{noheader}, která záhlaví s~logem zcela odstraní a
+adekvátně zmenší horní okraj stránky. Na začátku titulní stránky pak můžete
+použít například příkazy
+
+\begin{quote}
+\cmd{logo}\\
+\cmd{vspace\{1cm\}}
+\end{quote}
+
+nebo sáhnout po připravené titulní stránce, kterou balík také nabízí (viz
+dále). Tímto způsobem byl sázen tento dokument.
+
+\textbf{Zápatí} v~univerzitním stylu na stránky vloží příkaz \cmd{TULfooter}
+(opět je automaticky proveden) a odstraní je \cmd{noTULfooter}, který přejde na
+„krotké“ zápatí s~číslem stránky uprostřed. Třetí variantou je
+\cmd{TULfooternopage}, která se chová stejně jako \cmd{TULfooter}, ale
+neobsahuje číslo stránky.
+
+Pokud je aktivní \cmd{TULfooter} nebo \cmd{TULfooternopage}, lze příkazy
+\cmd{footaddress} a \cmd{nofootaddress} řídit, zda bude obsahovat název, adresu
+a kontaktní informace, nebo jen grafický spojovací prvek. Příkaz opět platí od
+místa svého použití dál. Na této stránce jsem použil \cmd{nofootaddress}, proto
+až do konce dokumentu v~zápatí nejsou uvedeny kontaktní údaje.
+\nofootaddress
+
+V~adrese je možné \textbf{změnit telefonní číslo a adresu elektronické pošty},
+pokud autor dokumentu chce vložit své vlastní kontaktní údaje. Slouží k~tomu
+příkazy \cmd{TULphone} a \cmd{TULmail}, jejichž argumentem je nová hodnota.
+Telefonní číslo je třeba uvádět celé, trojice číslic v~něm oddělujte tenkými
+mezerami~(\cmd{,}). Příkazy fungují jako přepínače~-- od okamžiku jejich
+použití bude nadále platit zadaná hodnota. Doporučuji použít je v~preambuli a
+v~těle dokumentu již údaje neměnit. Příklad použití:
+
+\begin{quote}
+\cmd{TULphone\{+420\textbackslash ,485\textbackslash ,351\textbackslash ,234\}}\\
+\cmd{TULmail\{Pavel.Satrapa@tul.cz\}}
+\end{quote}
+
+Balík počítá se sazbou na papír formátu~A4 a podle toho nastavuje okraje a
+rozměry tiskového zrcadla. Sázíte-li na jiný formát, je třeba po použití balíku
+upravit příslušné rozměry a znovu použít příkaz \cmd{TULfooter}, aby se
+přizpůsobil novým rozměrům stránky.
+
+Záhlaví a zápatí je realizováno balíkem \cmdfont{fancyhdr}. Pro případné zásahy
+do podoby těchto částí stránky použijte příkazy tohoto balíku.
+
+
+\section{Nadpisy částí textu}
+
+Balík automaticky aktivuje sazbu nadpisů všech částí textu tučným bezserifovým
+písmem. U~dvou nejvyšších úrovní (\cmd{section} a \cmd{chapter}, pokud použitá
+třída tuto úroveň definuje) zároveň sází nadpis fakultní barvou.
+
+Tyto funkce jsou implementovány pomocí balíku \cmdfont{titlesec}. Pokud je
+chcete změnit, použijte jeho rozhraní, konkrétně příkaz \cmd{titleformat*}.
+
+
+\section{Písma}\label{pisma}
+
+Manuál vizuálního stylu TUL definuje jako základní písmo pro dokumenty TUL
+komerční písmo Myriad Pro. V~principu je můžete použít, jak dokládá tento
+dokument, ale vaše instalace musí splňovat následující podmínky:
+
+\begin{itemize*}
+\item Písmo Myriad Pro musí být instalováno ve vašem systému (je například
+součástí balíku Adobe Creative Suite).
+
+\item Váš \LaTeX\ musí podporovat písma ve formátu OpenType. Tuto podmínku
+splňuje například \XeLaTeX, kterým byl sázen tento dokument.
+\end{itemize*}
+
+Jsou-li tyto podmínky splněny, můžete při použití balíku uvést volbu
+\cmdfont{fonts}, která pomocí příkazů balíku \cmdfont{fontspec} předefinuje jak
+serifovou (\cmdfont{rmfamily}), tak bezserifovou (\cmdfont{sffamily}) rodinu
+písma na Myriad Pro. Volba se postará o~použití balíku \cmdfont{fontspec}, ale
+nevkládá balíky \cmdfont{xunicode} a \cmdfont{xltxtra}, které s~ním obvykle
+bývají používány. Jejich případné použití musíte zajistit ve svém dokumentu.
+
+Vzhledem ke komerční licenci písma Myriad Pro je pravděpodobné, že základním
+písmem nebudete disponovat. Jako alternativy manuál vizuálního stylu uvádí
+písma Tahoma, případně Times. Písmo Tahoma je sice dostupné prakticky v~každých
+MS~Windows, ale vzhledem k~chybějící kurzívě v~podstatě nepoužitelné. Times je
+pak zcela obecné písmo a podle mého názoru nestojí za námahu spojenou se
+změnou.
+
+Proto balík \cmdfont{tul} ve výchozí podobě bez použití volby \cmdfont{fonts}
+do nastavení písem nijak nezasahuje a ponechává výchozí rodinu \LaTeX u
+Computer Modern. Pouze pro nadpisy částí textu používá jeho bezserifovou
+variantu (viz výše).
+
+
+\section{Titulní stránka}
+
+Součástí balíku jsou i příkazy pro vysázení titulní strany v~příslušném stylu.
+K~dispozici jsou dvě alternativy: \cmd{TULtitlepage} pro umírněnou verzi
+s~bílým pozadím a \cmd{TULfancytitlepage} pro barevnější verzi, jejíž spodní
+polovina nese barvu univerzity či její součásti. Až na název příkazu mají oba
+shodný tvar použití:
+
+\begin{quote}
+\cmd{TULtitlepage\{\emph{název}\}\{\emph{autor}\}\{\emph{datum}\}}
+\end{quote}
+
+V~argumentech lze používat jednoduché formátovací příkazy, nicméně
+doporučuji se omezit na případné rozdělování do více řádků pomocí
+\cmd{\textbackslash}~-- obvykle k~oddělení několika autorů nebo rozdělení
+názvu do více řádků. Například titulní strana tohoto dokumentu vznikla
+příkazem
+
+\begin{quote}\begin{flushleft}
+\cmd{TULfancytitlepage\{Návod k~použití\textbackslash\textbackslash balíku tul
+pro \textbackslash LaTeX\}\{Pavel Satrapa\}\{Liberec 2014\}}
+\end{flushleft}\end{quote}
+
+
+\section{Příklad}
+
+Tento text je příkladem použití balíku \cmdfont{tul}. Jedná se o~celkem
+standardní zdrojový text třídy \cmdfont{article}, jehož jedinou úpravou bylo
+použití příkazů
+
+\begin{quote}
+\cmd{usepackage[fonts,noheader]\{tul\}}\\
+\cmd{TULmail\{Pavel.Satrapa@tul.cz\}}
+\end{quote}
+
+v~preambuli.
+
+\end{document}
+

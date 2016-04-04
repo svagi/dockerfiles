@@ -1,0 +1,451 @@
+\ProvidesPackage{tul}[2015/11/12 version 1.2]
+% Licence: CC BY
+
+\RequirePackage{ifthen}
+% indikator, ktera fakulta/ustav je aktivni, hodnotu meni volby baliku
+\newcommand{\sekce@TUL}{TUL}
+% jazykova verze
+\newcommand{\TUL@nguage}{CZ}
+\newcommand{\CZTULsoucast}{Technick\'a univerzita v~Liberci}
+\newcommand{\ENTULsoucast}{Technical university of Liberec}
+\newcommand{\TULsoucast}{\ifthenelse{\equal{\TUL@nguage}{EN}}{\ENTULsoucast}{\CZTULsoucast}}
+
+% nastaveni stranky a rozmeru
+\setlength{\oddsidemargin}{-0.04cm}
+\setlength{\evensidemargin}{-0.04cm}
+\setlength{\textwidth}{16cm}
+\setlength{\topmargin}{-0.54cm}
+\setlength{\headheight}{1.8cm}
+\setlength{\headsep}{1.0cm}
+\setlength{\textheight}{21.5cm}
+\setlength{\footskip}{1.45cm}
+\setlength{\unitlength}{1mm}
+
+% barvy TUL a jednotlivych fakult
+\RequirePackage{graphicx}
+\RequirePackage[cmyk]{xcolor}
+\definecolor{tul}{cmyk}{0.5, 1, 0.5, 0.2}
+\definecolor{tulgray}{cmyk}{0, 0, 0, 0.8}
+\definecolor{tulFM}{cmyk}{0, 0.6, 1, 0}
+\definecolor{tulFS}{cmyk}{0.16, 0, 0, 0.5}
+\definecolor{tulFT}{cmyk}{0.35, 0.6, 1, 0}
+\definecolor{tulFP}{cmyk}{1, 0.5, 0, 0}
+\definecolor{tulEF}{cmyk}{0.6, 0, 1, 0}
+\definecolor{tulFA}{cmyk}{0.7, 0.9, 0, 0}
+\definecolor{tulUZS}{cmyk}{0.8, 0, 0.25, 0}
+\definecolor{tulCXI}{cmyk}{0, 1, 0.8, 0.2}
+\newcommand{\tulcolor}{tul}
+\newcommand{\titlecolor}{tul}
+
+% definice a vypocet rozmeru
+\newlength{\oddp@geshift}
+\newlength{\evenp@geshift}
+\newlength{\oddsp@jline}
+\newlength{\evensp@jline}
+\newlength{\b@tt@mtextwidth}
+
+\newcommand{\urcir@zmery}{\setlength{\oddp@geshift}{1in}
+\addtolength{\oddp@geshift}{\oddsidemargin}
+\addtolength{\oddp@geshift}{\hoffset}
+\setlength{\evenp@geshift}{1in}
+\addtolength{\evenp@geshift}{\evensidemargin}
+\addtolength{\evenp@geshift}{\hoffset}
+\setlength{\oddsp@jline}{\textwidth}
+\addtolength{\oddsp@jline}{\oddp@geshift}
+\addtolength{\oddsp@jline}{-1cm}
+\setlength{\evensp@jline}{\textwidth}
+\addtolength{\evensp@jline}{\evenp@geshift}
+\addtolength{\evensp@jline}{-1cm}
+\setlength{\b@tt@mtextwidth}{\textwidth}
+\addtolength{\b@tt@mtextwidth}{-13mm}}
+
+% kontaktni informace
+\newcommand{\TULkontakt@mail}{\ifthenelse{\equal{\TUL@nguage}{EN}}{name.surname@tul.cz}{jmeno.prijmeni@tul.cz}}
+\newcommand{\TULmail}[1]{\renewcommand{\TULkontakt@mail}{#1}\footaddress}
+\newcommand{\TULkontakt@phone}{+420\,485\,351\,111}
+\newcommand{\TULphone}[1]{\renewcommand{\TULkontakt@phone}{#1}\footaddress}
+\newcommand{\TUL@URL}{www.tul.cz}
+\newcommand{\TUL@adr}{{\color{tulgray}Studentsk\'a 1402/2
+      \oddel\ 461\,17 Liberec 1\ifthenelse{\equal{\TUL@nguage}{EN}}{ \oddel\ Czech Republic}{}}}
+\newcommand{\TULsekce@adr}{}
+
+% zahlavi a zapati
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancypagestyle{plain}{\pagestyle{fancy}}
+
+\newboolean{logo@head}
+\setboolean{logo@head}{true}
+\newboolean{addr@foot}
+\setboolean{addr@foot}{true}
+\newcommand{\TULheader}{\fancyhead{}\fancyhead[L]{\logo}\setboolean{logo@head}{true}}
+\newcommand{\noTULheader}{\fancyhead{}\setboolean{logo@head}{false}}
+
+% adresa pro zapati
+\newcommand{\b@tt@mtext}{}
+% prvni radek adresy
+\newcommand{\prvnir@dek}{{\color{black}\textbf{\ifthenelse{\equal{\TUL@nguage}{EN}}{TECHNICAL UNIVERSITY
+        OF LIBEREC}{TECHNICK\'A UNIVERZITA V LIBERCI}}
+      \ifthenelse{\equal{\TULsekce@adr}{}}{\ifthenelse{\equal{\sekce@TUL}{TUL}}{\ignorespaces}{\oddel
+        \ \textbf{\color{\tulcolor}\TULsoucast}}
+        \oddel\ \TUL@adr}{\oddel\ \TUL@adr\ \oddel
+        \ \textbf{\color{\tulcolor}\TULsoucast}}}\\[1.50ex]
+}
+% druhy radek adresy
+\newcommand{\druhyr@dek}{{\color{tulgray}\ifthenelse{\equal{\TULsekce@adr}{}}{\ignorespaces
+      }{\TULsekce@adr\ \oddel
+          \ifthenelse{\equal{\TUL@nguage}{EN}}{ Czech Republic \oddel}{}}
+      \textsl{\ifthenelse{\equal{\TUL@nguage}{EN}}{phone}{tel.}:\,\TULkontakt@phone}
+      \oddel\ \textsl{\TULkontakt@mail}
+      \oddel\ \textsl{\TUL@URL}
+      \oddel\ \textsl{\ifthenelse{\equal{\TUL@nguage}{EN}}{ID}{I\v C}:\,467\,47\,885}
+      \oddel\ \textsl{\ifthenelse{\equal{\TUL@nguage}{EN}}{VATIN}{DI\v C}:\,CZ\,467\,47\,885}
+}}
+% sestaveni adresy
+\newsavebox{\@drb@x}
+\newlength{\@drwidth}
+\newlength{\@drlinewidth}
+\newcommand{\makef@@tadr}{\ifthenelse{\boolean{addr@foot}}{
+    % změříme šířky
+    \savebox{\@drb@x}{\footnotesize\sffamily\prvnir@dek}
+    \settowidth{\@drwidth}{\usebox{\@drb@x}}%
+    \savebox{\@drb@x}{\footnotesize\sffamily\druhyr@dek}
+    \settowidth{\@drlinewidth}{\usebox{\@drb@x}}%
+    \ifthenelse{\lengthtest{\@drwidth<\@drlinewidth}}{\setlength{\@drwidth}{\@drlinewidth}}{}
+    % vytvoříme adresu na šířku delšího z řádků
+    \savebox{\@drb@x}{\footnotesize\sffamily\parbox{\@drwidth}{\prvnir@dek
+    \druhyr@dek}}%
+\ifthenelse{\lengthtest{\@drwidth<\b@tt@mtextwidth}}%
+{\renewcommand{\b@tt@mtext}{\usebox{\@drb@x}}}%
+{\renewcommand{\b@tt@mtext}{\resizebox{\b@tt@mtextwidth}{!}{\usebox{\@drb@x}}}}}%
+{\renewcommand{\b@tt@mtext}{}}}
+% ridici prikazy pro adresu v zapati
+\newcommand{\footaddress}{\setboolean{addr@foot}{true}\makef@@tadr}
+\newcommand{\nofootaddress}{\setboolean{addr@foot}{false}\makef@@tadr}
+
+\newcommand{\TULp@geno}{\thepage}
+
+\newcommand{\TULfooter}{\fancyfoot{}\urcir@zmery
+\renewcommand{\TULp@geno}{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+% zapati lichych stranek
+\fancyfootoffset[O]{\oddp@geshift}
+\fancyfoot[LO]{\vspace*{0mm}\makebox[\paperwidth][l]{\parbox{\oddsp@jline}%
+{\makebox[0pt][l]{\raisebox{-0.2em}[0pt][0pt]{\hspace{\oddp@geshift}\b@tt@mtext}}%
+\color{\tulcolor}\rule{\oddsp@jline}{1pt}}%
+\spojovaci\hspace{3mm}\parbox{10cm}{\color{\tulcolor}\rule{10cm}{1cm}}%
+\hspace{-97mm}\parbox{97mm}{\color{white}\sffamily\bfseries\TULp@geno}}}
+% zapati sudych stranek
+\if@twoside
+\fancyfootoffset[E]{\evenp@geshift}
+\fancyfoot[LE]{\vspace*{0mm}\makebox[\paperwidth][l]{%
+\parbox{\evenp@geshift}{\makebox[\evenp@geshift][r]{\color{\tulcolor}\rule{10cm}{1cm}\hspace{3mm}}}%
+\parbox{0pt}{\makebox[0pt][r]{\color{white}\sffamily\bfseries\TULp@geno\hspace{6mm}}}%
+\spojovaci
+\parbox{\evensp@jline}{\makebox[0pt][l]{\raisebox{-0.2em}[0pt][0pt]{\hspace{3mm}\b@tt@mtext}}%
+\color{\tulcolor}\rule{\evensp@jline}{1pt}}
+}}
+\fi
+}
+
+\newcommand{\TULfooternopage}{\TULfooter\renewcommand{\TULp@geno}{}}
+\newcommand{\noTULfooter}{\fancyfoot{}\fancyfoot[C]{\thepage}}
+\newcommand{\TULpage}{\TULheader\TULfooter}
+\TULpage
+
+% loga
+\newcommand{\znakTUL}{\includegraphics{znak-tul}}
+\newcommand{\znakTULbw}{\includegraphics{znak-tul-bw}}
+\newcommand{\logoTUL}{\includegraphics{logo-tul}}
+\newcommand{\logoTULalt}{\includegraphics{logo-tul-2}}
+\newcommand{\logoFS}{\includegraphics{logo-fs}}
+\newcommand{\logoFT}{\includegraphics{logo-ft}}
+\newcommand{\logoFP}{\includegraphics{logo-fp}}
+\newcommand{\logoEF}{\includegraphics{logo-ef}}
+\newcommand{\logoFA}{\includegraphics{logo-fa}}
+\newcommand{\logoFM}{\includegraphics{logo-fm}}
+\newcommand{\logoUZS}{\includegraphics{logo-uzs}}
+\newcommand{\logoCXI}{\includegraphics{logo-cxi}}
+\newcommand{\ENlogoTUL}{\includegraphics{logo-tul-en}}
+\newcommand{\ENlogoTULalt}{\includegraphics{logo-tul-2-en}}
+\newcommand{\ENlogoFS}{\includegraphics{logo-fs-en}}
+\newcommand{\ENlogoFT}{\includegraphics{logo-ft-en}}
+\newcommand{\ENlogoFP}{\includegraphics{logo-fp-en}}
+\newcommand{\ENlogoEF}{\includegraphics{logo-ef-en}}
+\newcommand{\ENlogoFA}{\includegraphics{logo-fa-en}}
+\newcommand{\ENlogoFM}{\includegraphics{logo-fm-en}}
+\newcommand{\ENlogoUZS}{\includegraphics{logo-uzs-en}}
+\newcommand{\ENlogoCXI}{\includegraphics{logo-cxi-en}}
+\newcommand{\CZlogo}{\logoTUL}
+\newcommand{\ENlogo}{\ENlogoTUL}
+\newcommand{\logo}{\ifthenelse{\equal{\TUL@nguage}{EN}}{\ENlogo}{\CZlogo}}
+
+% spojovaci prvek (ctverecky)
+\newcommand{\spojovaci}{\parbox{10mm}{\baselineskip=3.5mm \color{tulgray}%
+{\ifthenelse{\equal{\sekce@TUL}{FS}}{\color{\tulcolor}}{}\rule{3mm}{3mm}}\hskip 0.5mm
+{\ifthenelse{\equal{\sekce@TUL}{FT}}{\color{\tulcolor}}{}\rule{3mm}{3mm}}\hskip 0.5mm
+{\ifthenelse{\equal{\sekce@TUL}{FP}}{\color{\tulcolor}}{}\rule{3mm}{3mm}}\\
+{\ifthenelse{\equal{\sekce@TUL}{CXI}}{\color{\tulcolor}}{}\rule{3mm}{3mm}}\hskip 0.5mm
+{\ifthenelse{\equal{\sekce@TUL}{TUL}}{\color{\tulcolor}\rule{3mm}{3mm}}{\hskip 3mm}}\hskip 0.5mm
+{\ifthenelse{\equal{\sekce@TUL}{EF}}{\color{\tulcolor}}{}\rule{3mm}{3mm}}\\
+{\ifthenelse{\equal{\sekce@TUL}{UZS}}{\color{\tulcolor}}{}\rule{3mm}{3mm}}\hskip 0.5mm
+{\ifthenelse{\equal{\sekce@TUL}{FM}}{\color{\tulcolor}}{}\rule{3mm}{3mm}}\hskip 0.5mm
+{\ifthenelse{\equal{\sekce@TUL}{FA}}{\color{\tulcolor}}{}\rule{3mm}{3mm}}
+}}
+% oddelovac v textu (svisla cara ve fakultni barve)
+\newcommand{\oddel}{{\color{\tulcolor}\rule{1pt}{1.7ex}}}
+
+% styl a barva nadpisu
+\RequirePackage[sf, bf]{titlesec}
+\@ifundefined{chapter}{}{\titleformat*{\chapter}{\color{\titlecolor}\sffamily\bfseries\LARGE}}
+\@ifundefined{section}{}{\titleformat*{\section}{\color{\titlecolor}\sffamily\bfseries\Large}}
+
+% titulni stranka
+\newsavebox{\@uthb@x}
+\newlength{\@uthwidth}
+\newlength{\@uthheight}
+\newlength{\@uthdepth}
+\newlength{\@uthleftwidth}
+\newsavebox{\titleb@x}
+\newlength{\title@height}
+\newsavebox{\dateb@x}
+\newlength{\date@height}
+\newlength{\tul@tmp}
+
+\newcommand{\create@uthb@x}[1]{%
+\savebox{\@uthb@x}{\textbf{\color{\tulcolor}\sffamily\Large\renewcommand{\arraystretch}{1.3}%
+\begin{tabular}{@{\hspace{1.5em}}r@{}}\vspace{-0.7em}\\#1\\\vspace{-0.7em}\end{tabular}}}%
+\settowidth{\@uthwidth}{\usebox{\@uthb@x}}%
+\addtolength{\@uthwidth}{\paperwidth}%
+\addtolength{\@uthwidth}{-\textwidth}%
+\addtolength{\@uthwidth}{-\oddsidemargin}%
+\addtolength{\@uthwidth}{-\hoffset}%
+\addtolength{\@uthwidth}{-1in}%
+\settodepth{\@uthdepth}{\usebox{\@uthb@x}}%
+\settoheight{\@uthheight}{\usebox{\@uthb@x}}%
+\addtolength{\@uthheight}{\@uthdepth}%
+\addtolength{\@uthheight}{2pt}%
+\setlength{\@uthleftwidth}{\paperwidth}%
+\addtolength{\@uthleftwidth}{-\@uthwidth}%
+}
+
+\newcommand{\createtitleb@x}[1]{\savebox{\titleb@x}{%
+\begin{minipage}{\textwidth}
+\begin{flushright}
+\color{tulgray}\Huge\setlength{\baselineskip}{1.7em}
+\emph{#1}
+\end{flushright}
+\end{minipage}}%
+\settoheight{\title@height}{\usebox{\titleb@x}}%
+\settodepth{\tul@tmp}{\usebox{\titleb@x}}%
+\addtolength{\title@height}{\tul@tmp}%
+}
+
+\newcommand{\createdateb@x}[1]{\savebox{\dateb@x}{%
+\begin{minipage}{\textwidth}
+\begin{flushright}
+\color{white}\Large #1
+\end{flushright}
+\end{minipage}}%
+\settoheight{\date@height}{\usebox{\dateb@x}}%
+\settodepth{\tul@tmp}{\usebox{\dateb@x}}%
+\addtolength{\date@height}{\tul@tmp}%
+}
+
+\newcommand{\TULtitlepage}[3]{{%
+\fancyhead{}
+\create@uthb@x{#2}%
+\raisebox{0pt}[0pt][0pt]{\logo}\par\sffamily
+\vfill
+%nazev
+\begin{flushright}
+\color{tulgray}\huge\setlength{\baselineskip}{1.7em}
+\emph{#1}
+\end{flushright}
+\vfill
+% autor
+\makebox[\textwidth][l]{\hspace*{-\oddp@geshift}%
+{\color{tulgray}\rule{\@uthleftwidth}{\@uthheight}}%
+\begin{minipage}[b]{\@uthwidth}\offinterlineskip%
+{\color{\tulcolor}\rule{\@uthwidth}{1pt}}\\
+\usebox{\@uthb@x}\\
+{\color{\tulcolor}\rule{\@uthwidth}{1pt}}
+\end{minipage}}\par
+\vfill
+\vfill
+% datum
+\begin{flushright}
+\Large #3
+\end{flushright}
+\vfill
+\TULfooternopage\nofootaddress\mbox{}
+\newpage
+\ifthenelse{\boolean{logo@head}}{\TULheader}{}%
+\TULfooter\footaddress
+}}
+
+\newcommand{\TULfancytitlepage}[3]{{%
+\fancyhead{}
+\createtitleb@x{#1}\create@uthb@x{#2}\createdateb@x{#3}%
+\newlength{\vertshift}%
+\setlength{\vertshift}{\textheight}%
+\newlength{\vertsize}%
+\setlength{\vertsize}{\textheight}%
+\addtolength{\vertsize}{-\title@height}%
+\addtolength{\vertsize}{-\@uthheight}%
+\addtolength{\vertsize}{-\date@height}%
+\setlength{\vertsize}{0.6\vertsize}%
+\addtolength{\vertsize}{0.2\@uthheight}%
+\addtolength{\vertsize}{\date@height}%
+\raisebox{-\vertshift}[0pt][0pt]{\makebox[0pt][l]{\color{\tulcolor}\hspace{-\oddp@geshift}%
+\rule{\paperwidth}{\vertsize}}}%
+\raisebox{0pt}[0pt][0pt]{\logo}\par\sffamily
+\vfill
+%nazev
+\usebox{\titleb@x}
+\vfill
+% autor
+\addtolength{\@uthheight}{-1pt}%
+\makebox[\textwidth][l]{\hspace*{-\oddp@geshift}%
+{\color{tulgray}\rule{\@uthleftwidth}{\@uthheight}}%
+%{\color{tulgray}\rule{2cm}{\@uthheight}}%
+\makebox[0pt][l]{\color{white}\rule{\@uthwidth}{\@uthheight}}%
+\begin{minipage}[b]{\@uthwidth}\offinterlineskip%
+{\color{\tulcolor}\rule{\@uthwidth}{1pt}}\\
+\usebox{\@uthb@x}\\
+\end{minipage}}\par
+\vfill
+\vfill
+% datum
+\usebox{\dateb@x}
+\vfill
+\TULfooternopage\nofootaddress\mbox{}
+\newpage
+\ifthenelse{\boolean{logo@head}}{\TULheader}{}%
+\TULfooter\footaddress
+}}
+
+% pisma - priprava
+\newboolean{TULf@nts}
+\setboolean{TULf@nts}{false}
+
+% prepinac stylu: nazev fakulty/ustavu
+\newcommand{\switchTULstyle}[1]{
+    \renewcommand{\sekce@TUL}{#1}
+    \renewcommand{\tulcolor}{tul#1}
+    \renewcommand{\titlecolor}{tul#1}
+    \renewcommand{\CZlogo}{\csname logo#1\endcsname}
+    \renewcommand{\ENlogo}{\csname ENlogo#1\endcsname}
+}
+
+% volby baliku
+\DeclareOption{EN}{\renewcommand{\TUL@nguage}{EN}}
+
+\DeclareOption{FS}{\switchTULstyle{FS}%
+\renewcommand{\ENTULsoucast}{Faculty of Mechanical Engineering}%
+\renewcommand{\CZTULsoucast}{Fakulta strojn\'\i{}}%
+\TULphone{+420\,485\,353\,108}
+\renewcommand{\TUL@URL}{www.fs.tul.cz}
+}
+
+\DeclareOption{FT}{\switchTULstyle{FT}%
+\renewcommand{\ENTULsoucast}{Faculty of Textile Engineering}%
+\renewcommand{\CZTULsoucast}{Fakulta textiln\'\i{}}%
+\TULphone{+420\,485\,353\,452}
+\renewcommand{\TUL@URL}{www.ft.tul.cz}
+}
+
+\DeclareOption{FP}{\switchTULstyle{FP}%
+\renewcommand{\ENTULsoucast}{Faculty of Sciences, Humanities and Education}%
+\renewcommand{\CZTULsoucast}{Fakulta p\v r\'\i{}rodov\v edn\v e-humanitn\'\i{} a pedagogick\'a}%
+\TULphone{+420\,485\,352\,515}
+\renewcommand{\TUL@URL}{www.fp.tul.cz}
+\renewcommand{\TULsekce@adr}{Univerzitn\'\i{} n\'am\v est\'\i{} 1410/1 \protect\oddel\ 461\,17 Liberec 1}
+}
+
+\newcommand{\@ktivujEF}{\switchTULstyle{EF}%
+\renewcommand{\ENTULsoucast}{Faculty of Economics}%
+\renewcommand{\CZTULsoucast}{Ekonomick\'a fakulta}%
+\TULphone{+420\,485\,352\,388}
+\renewcommand{\TUL@URL}{www.ef.tul.cz}
+\renewcommand{\TULsekce@adr}{Voron\v e\v zsk\'a 1329/13 \protect\oddel\ 460\,02 Liberec 2}
+}
+\DeclareOption{EF}{\@ktivujEF}
+% nedokumentovaná volba pro snadné použití s databázemi, které obsahují zkratku FE
+\DeclareOption{FE}{\@ktivujEF}
+
+\DeclareOption{FA}{\switchTULstyle{FA}%
+\renewcommand{\ENTULsoucast}{Faculty of Arts and Architecture}%
+\renewcommand{\CZTULsoucast}{Fakulta um\v en\'\i{} a architektury}%
+\TULphone{+420\,485\,353\,593}
+\renewcommand{\TUL@URL}{www.fua.tul.cz}
+}
+
+\DeclareOption{FM}{\switchTULstyle{FM}%
+\renewcommand{\ENTULsoucast}{Faculty of Mechatronics, Informatics and Interdisciplinary Studies}%
+\renewcommand{\CZTULsoucast}{Fakulta mechatroniky, informatiky a mezioborov\'ych studi\'\i{}}%
+\TULphone{+420\,485\,353\,624}
+\renewcommand{\TUL@URL}{www.fm.tul.cz}
+}
+
+\DeclareOption{UZS}{\switchTULstyle{UZS}%
+\renewcommand{\ENTULsoucast}{Institute of Health Studies}%
+\renewcommand{\CZTULsoucast}{\'Ustav zdravotnick\'ych studi\'\i{}}%
+\TULphone{+420\,485\,353\,593}
+\renewcommand{\TUL@URL}{www.uzs.tul.cz}
+}
+
+\DeclareOption{CXI}{\switchTULstyle{CXI}%
+\renewcommand{\ENTULsoucast}{Centre for Nanomaterials, Advanced Technologies and Innovation}%
+\renewcommand{\CZTULsoucast}{\'Ustav pro nanomateri\'aly, pokro\v cil\'e technologie a inovace}%
+\TULphone{+420\,485\,351\,111}
+\renewcommand{\TUL@URL}{www.cxi.tul.cz}
+}
+
+\DeclareOption{bwtitles}{
+    \renewcommand{\titlecolor}{black}
+}
+
+\DeclareOption{bw}{
+    \renewcommand{\tulcolor}{black!50}
+    \renewcommand{\titlecolor}{black}
+    \renewcommand{\znakTUL}{\znakTULbw}
+    \renewcommand{\logoTUL}{\includegraphics{logo-tul-bw}}
+    \renewcommand{\logoTULalt}{\includegraphics{logo-tul-2-bw}}
+    \renewcommand{\logoFS}{\includegraphics{logo-fs-bw}}
+    \renewcommand{\logoFT}{\includegraphics{logo-ft-bw}}
+    \renewcommand{\logoFP}{\includegraphics{logo-fp-bw}}
+    \renewcommand{\logoEF}{\includegraphics{logo-ef-bw}}
+    \renewcommand{\logoFA}{\includegraphics{logo-fa-bw}}
+    \renewcommand{\logoFM}{\includegraphics{logo-fm-bw}}
+    \renewcommand{\logoUZS}{\includegraphics{logo-uzs-bw}}
+    \renewcommand{\logoCXI}{\includegraphics{logo-cxi-bw}}
+    \renewcommand{\ENlogoTUL}{\includegraphics{logo-tul-en-bw}}
+    \renewcommand{\ENlogoTULalt}{\includegraphics{logo-tul-2-en-bw}}
+    \renewcommand{\ENlogoFS}{\includegraphics{logo-fs-en-bw}}
+    \renewcommand{\ENlogoFT}{\includegraphics{logo-ft-en-bw}}
+    \renewcommand{\ENlogoFP}{\includegraphics{logo-fp-en-bw}}
+    \renewcommand{\ENlogoEF}{\includegraphics{logo-ef-en-bw}}
+    \renewcommand{\ENlogoFA}{\includegraphics{logo-fa-en-bw}}
+    \renewcommand{\ENlogoFM}{\includegraphics{logo-fm-en-bw}}
+    \renewcommand{\ENlogoUZS}{\includegraphics{logo-uzs-en-bw}}
+    \renewcommand{\ENlogoCXI}{\includegraphics{logo-cxi-en-bw}}
+}
+
+\DeclareOption{fonts}{\setboolean{TULf@nts}{true}}
+
+\DeclareOption{noheader}{
+    \setlength{\headheight}{0cm}
+    \setlength{\textheight}{23.3cm}
+    \noTULheader
+}
+
+\ProcessOptions
+
+% aktivace pisem
+\ifthenelse{\boolean{TULf@nts}}{
+    \RequirePackage{fontspec}
+    \setmainfont[Mapping=tex-text,BoldFont={* Bold}]{Myriad Pro}
+    \setsansfont[Mapping=tex-text,BoldFont={* Bold}]{Myriad Pro}}{}
+
+\AtBeginDocument{\makef@@tadr}
