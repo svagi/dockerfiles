@@ -2,6 +2,8 @@
 
 http://www.nti.tul.cz/~satrapa/vyuka/latex-tul/
 
+- Neobsahuje komerční písma!
+
 ## Použití
 
 ```
