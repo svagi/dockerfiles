@@ -5,6 +5,7 @@ MAINTAINER Jan Svager <jan@svager.cz>
 RUN apt-get update \
  && apt-get --no-install-recommends install -y \
   texlive-lang-czechslovak \
+  texlive-generic-extra \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
