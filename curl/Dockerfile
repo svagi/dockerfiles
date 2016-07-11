@@ -1,6 +1,6 @@
-FROM alpine:3.3
+FROM alpine:3.4
 MAINTAINER Jan Svager <jan@svager.cz>
-ENV NGHTTP2_VERSION=1.9.2 CURL_VERSION=7.48.0
+ENV NGHTTP2_VERSION=1.12.0 CURL_VERSION=7.49.1
 RUN apk --no-cache add \
   build-base \
   ca-certificates \
