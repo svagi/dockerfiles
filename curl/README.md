@@ -1,6 +1,6 @@
 # CURL tool with HTTP/2 support
 
-[![](https://badge.imagelayers.io/svagi/curl:.svg)](https://imagelayers.io/?images=svagi/curl:latest 'Get your own badge on imagelayers.io')
+[![](https://images.microbadger.com/badges/image/svagi/curl.svg)](http://microbadger.com/images/svagi/curl)
 
 ## Quick start
 

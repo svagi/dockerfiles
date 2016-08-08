@@ -1,6 +1,6 @@
 # OpenSSL
 
-[![](https://badge.imagelayers.io/svagi/openssl:latest.svg)](https://imagelayers.io/?images=svagi/openssl:latest)
+[![](https://images.microbadger.com/badges/version/svagi/openssl.svg)](http://microbadger.com/images/svagi/openssl)
 
 ## Usage
 

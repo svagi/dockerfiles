@@ -1,5 +1,5 @@
 # Apache Benchmark
-[![](https://badge.imagelayers.io/svagi/ab:latest.svg)](https://imagelayers.io/?images=svagi/ab:latest)
+[![](https://images.microbadger.com/badges/image/svagi/ab.svg)](https://microbadger.com/images/svagi/ab)
 ## Usage
 ```
 docker run --rm -t svagi/ab https://hub.docker.com/

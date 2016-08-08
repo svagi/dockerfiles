@@ -1,7 +1,7 @@
 # h2load
 Benchmarking tool for HTTP/2
 
-[![](https://badge.imagelayers.io/svagi/h2load:latest.svg)](https://imagelayers.io/?images=svagi/h2load:latest)
+[![](https://images.microbadger.com/badges/image/svagi/h2load.svg)](http://microbadger.com/images/svagi/h2load)
 
 ## Usage
 ```
