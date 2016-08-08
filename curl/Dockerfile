@@ -1,7 +1,7 @@
 FROM alpine:3.4
 MAINTAINER Jan Svager <jan@svager.cz>
-ENV NGHTTP2_VERSION=1.12.0 CURL_VERSION=7.49.1
-RUN apk --no-cache add \
+RUN NGHTTP2_VERSION=1.13.0 CURL_VERSION=7.50.1 \
+ && apk --no-cache add \
   build-base \
   ca-certificates \
   openssl-dev \
