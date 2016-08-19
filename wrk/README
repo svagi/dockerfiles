@@ -1,0 +1,6 @@
+# wrk - Modern HTTP benchmarking tool
+[![](https://images.microbadger.com/badges/image/svagi/wrk.svg)](https://microbadger.com/images/svagi/wrk)
+## Usage
+```
+docker run --rm -t svagi/wrk -t4 -c400 -d10s https://hub.docker.com/
+```
